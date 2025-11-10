@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 export default function Dashboards() {
   return (
     <section
-      className="flex flex-col justify-center items-center w-full px-6 py-20 bg-gray-800 gap-6"
+      className="flex flex-col justify-center items-center w-full px-6 py-20 bg-black gap-6"
       id="dashboards"
     >
       <h2 className="text-3xl font-bold text-white">Dashboards Interativos</h2>
