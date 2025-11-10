@@ -34,13 +34,13 @@ export default function Hero() {
 
         <div className="flex flex-col md:flex-row gap-4 justify-center">
           <Button
-            style="bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white font-semibold py-4 px-8 rounded-full transition duration-300 transform hover:scale-105 focus:scale-105 focus:from-blue-600 shadow-lg"
+            style="bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white font-semibold py-4 px-8 rounded-lg transition duration-300 transform hover:scale-105 focus:scale-105 focus:from-blue-600 shadow-lg"
             title="Ver Integrantes"
             onClick={() => scrollToSection("membros")}
           />
 
           <Button
-            style="border-2 border-white text-white hover:bg-white hover:text-gray-900 font-semibold py-4 px-8 rounded-full transition duration-300 transform hover:scale-105 focus:scale-105 focus:bg-white focus:text-gray-900 shadow-lg"
+            style="border-2 border-white text-white hover:bg-white hover:text-gray-900 font-semibold py-4 px-8 rounded-lg transition duration-300 transform hover:scale-105 focus:scale-105 focus:bg-white focus:text-gray-900 shadow-lg"
             title="Ferramentas Utilizadas"
             onClick={() => scrollToSection("ferramentas")}
           />

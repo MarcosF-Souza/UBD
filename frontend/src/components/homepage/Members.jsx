@@ -27,7 +27,10 @@ export default function Members() {
 
 function MemberCard({ name, role }) {
   return (
-    <div className="bg-gray-800 rounded-lg p-6 m-4 w-64 text-center">
+    <div
+      className="bg-gray-800 rounded-lg p-6 m-4 w-64 text-center transform hover:scale-105 focus:scale-105 transition-transform"
+      tabIndex={0}
+    >
       <h3 className="text-xl font-semibold mb-2">{name}</h3>
       <p className="text-gray-400">{role}</p>
     </div>
