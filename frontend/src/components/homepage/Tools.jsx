@@ -37,7 +37,7 @@ export default function Tools() {
       className="flex flex-col items-center min-h-screen w-full px-6 py-20 text-white bg-gray-800"
       id="ferramentas"
     >
-      <h2 className="text-3xl font-bold mb-8 text-left w-full">
+      <h2 className="text-3xl font-bold mb-8 text-left w-full md:text-center">
         Ferramentas Utilizadas
       </h2>
 
