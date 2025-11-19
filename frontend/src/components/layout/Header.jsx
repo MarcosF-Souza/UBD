@@ -9,9 +9,9 @@ export default function Header() {
     <header className="flex justify-between md:px-20 items-center bg-gray-950 px-6 py-4 h-16 fixed top-0 left-0 w-full lg:hidden z-100 border-b border-gray-800">
       <Link
         to="/"
-        className="font-bold text-2xl bg-linear-to-r from-blue-400 to-purple-600 bg-clip-text text-transparent"
+        className="font-bold text-lg bg-linear-to-r from-blue-400 to-purple-600 bg-clip-text text-transparent"
       >
-        Atividade AV2
+        Heart Energy Data Analyzer
       </Link>
       <ThemeToggle />
     </header>

@@ -75,7 +75,7 @@ export default function EnergySummary() {
   return (
     <section className="grid grid-cols-1 auto-rows-auto bg-secondary p-6 rounded-lg gap-6">
       <div>
-        <h2 className="text-2xl font-bold mb-2">Métricas Principais</h2>
+        <h2 className="text-2xl font-bold mb-2">Outras Métricas</h2>
         <p className="text-muted text-sm">
           Análise de rendimento dos painéis solares ao longo do dia
         </p>
@@ -96,7 +96,7 @@ export default function EnergySummary() {
   );
 }
 
-function MetricCard({ title, value, color, icon }) {
+function MetricCard({ title, value, color }) {
   return (
     <article className="p-4 rounded-lg bg-tertiary border border-gray-700 hover:border-gray-600 transition-colors">
       <div className="flex items-center justify-between">

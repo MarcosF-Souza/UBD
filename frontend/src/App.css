@@ -61,3 +61,39 @@
   border-color: var(--border-muted);
   transition: border-color 0.3s ease;
 }
+
+.energy__main {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: auto;
+  grid-template-areas:
+    "aph"
+    "sp"
+    "hm";
+}
+
+.energy__average-per-hour {
+  grid-area: aph;
+}
+
+.energy__scatter {
+  grid-area: sp;
+}
+
+.energy__heat-map {
+  grid-area: hm;
+}
+
+.energy__secondary {
+  display: grid;
+  grid-template-columns: 1fr;
+}
+
+@media screen and (min-width: 1440px) {
+  .energy__main {
+    grid-template-columns: 1fr 1fr;
+    grid-template-areas:
+      "aph aph"
+      "sp hm";
+  }
+}

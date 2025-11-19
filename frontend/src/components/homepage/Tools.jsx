@@ -83,7 +83,7 @@ function ToolItem({ icon, name }) {
       tabIndex={0}
     >
       <img src={icon} alt={`${name} icon`} className="w-10 h-10" />
-      <span className="text-lg text-primary">{name}</span>
+      <span className="text-lg text-primary text-center">{name}</span>
     </div>
   );
 }
