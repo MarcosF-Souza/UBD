@@ -27,7 +27,7 @@ export default function BottomNavigationBar() {
   };
 
   return (
-    <nav className="flex justify-around h-16 items-center sticky bottom-0 left-0 w-full bg-gray-950/95 backdrop-blur-md px-6 py-4 text-white md:hidden z-50 border-t border-gray-800">
+    <nav className="flex justify-around md:justify-evenly h-16 items-center sticky bottom-0 left-0 w-full bg-gray-950/95 backdrop-blur-md px-6 py-4 text-white lg:hidden z-50 border-t border-gray-800">
       {navigationItems.map((item) => (
         <NavigationItem
           key={item.id}

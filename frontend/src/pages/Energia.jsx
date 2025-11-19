@@ -1,7 +1,8 @@
-import EnergySummary from "../components/energypage/EnergySummary";
-import EnergyTempPot from "../components/energypage/EnergyTempPot";
+import EnergyAveragePerHour from "../components/energypage/EnergyAveragePerHour";
 import EnergyEfficiencyByHour from "../components/energypage/EnergyEfficiencyByHour";
 import EnergyEvolution from "../components/energypage/EnergyEvolution";
+import EnergySummary from "../components/energypage/EnergySummary";
+import EnergyTempPot from "../components/energypage/EnergyTempPot";
 
 export default function Energia() {
   return (
@@ -14,6 +15,7 @@ export default function Energia() {
 
       <div className="grid auto-rows-auto gap-6">
         <EnergySummary />
+        <EnergyAveragePerHour />
         <EnergyTempPot />
         <EnergyEfficiencyByHour />
         <EnergyEvolution />

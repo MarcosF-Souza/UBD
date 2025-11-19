@@ -6,7 +6,7 @@ import { useTheme } from "../../hooks/useTheme";
 
 export default function Header() {
   return (
-    <header className="flex justify-between items-center bg-gray-950 px-6 py-4 h-16 fixed top-0 left-0 w-full md:hidden z-100 border-b border-gray-800">
+    <header className="flex justify-between md:px-20 items-center bg-gray-950 px-6 py-4 h-16 fixed top-0 left-0 w-full lg:hidden z-100 border-b border-gray-800">
       <Link
         to="/"
         className="font-bold text-2xl bg-linear-to-r from-blue-400 to-purple-600 bg-clip-text text-transparent"
