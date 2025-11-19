@@ -36,7 +36,7 @@ export default function Sidebar() {
             to="/"
             className="font-bold text-2xl bg-linear-to-r from-blue-400 to-purple-600 bg-clip-text text-transparent block whitespace-nowrap overflow-hidden max-w-xs"
           >
-            AV2 UBD
+            HEDA
           </Link>
         )}
         <button

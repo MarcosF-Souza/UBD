@@ -87,8 +87,9 @@
 .energy__secondary {
   display: grid;
   grid-template-columns: 1fr;
-  grid-template-areas: "em" 
-                       "ee";  /* ****** */
+  grid-template-areas:
+    "em"
+    "ee"; /* ****** */
   gap: 1rem;
 }
 
@@ -105,7 +106,7 @@
 }
 
 /* DeskTop */
-@media screen and (min-width: 1440px) { 
+@media screen and (min-width: 1440px) {
   .energy__main {
     grid-template-columns: 1fr 1fr;
     grid-template-areas:
@@ -117,5 +118,8 @@
     grid-template-columns: 1fr 1fr;
     grid-template-areas: "em ee";
   }
-}
 
+  .energy__metrics {
+    grid-template-columns: 1fr;
+  }
+}

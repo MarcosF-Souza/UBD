@@ -11,7 +11,7 @@ export default function Header() {
         to="/"
         className="font-bold text-lg bg-linear-to-r from-blue-400 to-purple-600 bg-clip-text text-transparent"
       >
-        Heart Energy Data Analyzer
+        HEDA
       </Link>
       <ThemeToggle />
     </header>
