@@ -89,7 +89,7 @@
   grid-template-columns: 1fr;
 }
 
-@media screen and (min-width: 1024px) {
+@media screen and (min-width: 1440px) {
   .energy__main {
     grid-template-columns: 1fr 1fr;
     grid-template-areas:
