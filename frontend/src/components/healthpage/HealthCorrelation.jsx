@@ -40,10 +40,10 @@ export default function HealthCorrelation() {
     const n = variables.length;
 
     // Calculate dimensions
-    const margin = { top: 80, right: 40, bottom: 40, left: 80 };
+    const margin = { top: 40, right: 10, bottom: 20, left: 20 };
     const cellSize = Math.min(
       (containerWidth - margin.left - margin.right) / n,
-      80 // Increased from 60 to 80 for larger cells
+      80
     );
     const width = cellSize * n;
     const height = cellSize * n;
@@ -85,13 +85,13 @@ export default function HealthCorrelation() {
       .scaleBand()
       .domain(variables)
       .range([0, width])
-      .padding(0.1); // Increased padding for more spacing between blocks
+      .padding(0.1);
 
     const yScale = d3
       .scaleBand()
       .domain(variables)
       .range([0, height])
-      .padding(0.1); // Increased padding for more spacing between blocks
+      .padding(0.1);
 
     // Prepare data for cells
     const cellData = [];
@@ -296,7 +296,7 @@ export default function HealthCorrelation() {
 
   return (
     <article className="flex flex-col bg-tertiary p-6 rounded-lg h-full">
-      <h3 className="text-xl font-medium">
+      <h3 className="text-xl font-medium text-center xl:text-left">
         Matriz de Correlação entre Variáveis
       </h3>
       <div ref={chartRef}></div>

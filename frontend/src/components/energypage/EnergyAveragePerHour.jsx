@@ -208,7 +208,7 @@ export default function EnergyAveragePerHour() {
 
   return (
     <article className="bg-tertiary p-4 rounded-lg energy__average-per-hour">
-      <h3 className="text-xl font-semibold mb-4">
+      <h3 className="text-xl font-semibold mb-4 text-center xl:text-left">
         Rendimento Médio por Horário
       </h3>
 

@@ -268,7 +268,7 @@ export default function EnergyEvolution() {
 
   return (
     <article className="bg-tertiary energy__evolution p-4 rounded-lg">
-      <h3 className="text-xl font-semibold mb-4">
+      <h3 className="text-xl font-semibold mb-4 text-center xl:text-left">
         Evolução da Eficiência ao Longo do Dia
       </h3>
       <div ref={chartRef} className="w-full h-full"></div>

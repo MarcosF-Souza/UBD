@@ -300,7 +300,7 @@ export default function EnergyHeatMap() {
 
   return (
     <article className="bg-tertiary p-4 rounded-lg energy__heat-map">
-      <h3 className="text-xl font-semibold mb-4">Eficiência por Hora do Dia</h3>
+      <h3 className="text-xl font-semibold mb-4 text-center xl:text-left">Eficiência por Hora do Dia</h3>
 
       <div ref={chartRef} className="w-full"></div>
     </article>
