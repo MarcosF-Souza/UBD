@@ -1,59 +1,24 @@
 import * as d3 from "d3";
-import { useCallback, useEffect, useRef, useState } from "react";
+import { memo, useCallback, useRef } from "react";
+import { useApiData } from "../../hooks/useApiData";
+import { useD3Chart } from "../../hooks/useD3Chart";
+import { API_ENDPOINTS } from "../../config/constants";
+import { getThemeColors, createResponsiveSVG } from "../../utils/d3Utils";
 
-export default function EnergyAveragePerHour() {
-  const [data, setData] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+function EnergyAveragePerHour() {
   const chartRef = useRef(null);
-
-  useEffect(() => {
-    fetch("http://localhost:8000/api/energia/rendimento/")
-      .then((response) => {
-        if (!response.ok) throw new Error("Erro ao carregar dados");
-        return response.json();
-      })
-      .then((jsonData) => {
-        setData(jsonData);
-        setLoading(false);
-      })
-      .catch((err) => {
-        setError(err.message);
-        setLoading(false);
-      });
-  }, []);
+  const { data, loading, error } = useApiData(API_ENDPOINTS.energia.rendimento);
 
   const createRendimentoChart = useCallback(() => {
     if (!data || !chartRef.current) return;
 
-    // Limpa gráfico anterior
-    d3.select(chartRef.current).selectAll("*").remove();
-
     const margin = { top: 20, right: 20, bottom: 40, left: 50 };
-    const containerWidth = chartRef.current.offsetWidth;
-    const width = containerWidth - margin.left - margin.right;
-    const height = 200 - margin.top - margin.bottom;
+    const { g, width, height } = createResponsiveSVG(chartRef.current, margin, 200);
 
-    // Garante que o width seja válido
-    if (width <= 0) return;
+    if (!g || width <= 0) return;
 
-    // Obtém as cores do tema atual
-    const styles = getComputedStyle(document.documentElement);
-    const textMutedColor = styles.getPropertyValue("--text-muted").trim();
-    const textPrimaryColor = styles.getPropertyValue("--text-primary").trim();
-
-    const svg = d3
-      .select(chartRef.current)
-      .append("svg")
-      .attr("width", "100%")
-      .attr("height", height + margin.top + margin.bottom)
-      .attr(
-        "viewBox",
-        `0 0 ${containerWidth} ${height + margin.top + margin.bottom}`
-      )
-      .attr("preserveAspectRatio", "xMidYMid meet")
-      .append("g")
-      .attr("transform", `translate(${margin.left},${margin.top})`);
+    // Get theme colors
+    const colors = getThemeColors();
 
     // Prepara dados
     const chartData = data.dados_brutos.map((d) => ({
@@ -74,16 +39,16 @@ export default function EnergyAveragePerHour() {
       .range([height, 0]);
 
     // Eixos
-    svg
+    g
       .append("g")
       .attr("transform", `translate(0,${height})`)
       .call(d3.axisBottom(x))
-      .attr("color", textMutedColor)
+      .attr("color", colors.textMuted)
       .selectAll("text")
       .style("font-size", "12px")
-      .attr("fill", textMutedColor);
+      .attr("fill", colors.textMuted);
 
-    svg
+    g
       .append("g")
       .call(
         d3
@@ -91,10 +56,10 @@ export default function EnergyAveragePerHour() {
           .ticks(5)
           .tickFormat((d) => `${d.toFixed(1)}%`)
       )
-      .attr("color", textMutedColor)
+      .attr("color", colors.textMuted)
       .selectAll("text")
       .style("font-size", "12px")
-      .attr("fill", textMutedColor);
+      .attr("fill", colors.textMuted);
 
     // Barras com cores diferentes para cada uma
     const colorScale = d3
@@ -102,7 +67,7 @@ export default function EnergyAveragePerHour() {
       .domain([0, chartData.length])
       .interpolator(d3.interpolateRainbow);
 
-    svg
+    g
       .selectAll(".bar")
       .data(chartData)
       .enter()
@@ -122,7 +87,7 @@ export default function EnergyAveragePerHour() {
       });
 
     // Labels nos valores
-    svg
+    g
       .selectAll(".label")
       .data(chartData)
       .enter()
@@ -131,54 +96,17 @@ export default function EnergyAveragePerHour() {
       .attr("x", (d) => x(d.hora) + x.bandwidth() / 2)
       .attr("y", (d) => y(d.rendimento) - 5)
       .attr("text-anchor", "middle")
-      .attr("fill", textPrimaryColor)
+      .attr("fill", colors.textPrimary)
       .style("font-size", "11px")
       .text((d) => `${d.rendimento.toFixed(1)}%`);
   }, [data]);
 
-  useEffect(() => {
-    if (data && chartRef.current) {
-      createRendimentoChart();
-    }
-  }, [data, createRendimentoChart]);
-
-  // Adiciona responsividade com ResizeObserver
-  useEffect(() => {
-    if (!chartRef.current) return;
-
-    const resizeObserver = new ResizeObserver(() => {
-      // Debounce para evitar muitas renderizações
-      const timeoutId = setTimeout(() => {
-        createRendimentoChart();
-      }, 100);
-
-      return () => clearTimeout(timeoutId);
-    });
-
-    resizeObserver.observe(chartRef.current);
-
-    return () => {
-      resizeObserver.disconnect();
-    };
-  }, [createRendimentoChart]);
-
-  // Observa mudanças no tema e recria o gráfico
-  useEffect(() => {
-    const observer = new MutationObserver(() => {
-      if (data && chartRef.current) {
-        createRendimentoChart();
-      }
-    });
-
-    observer.observe(document.documentElement, {
-      attributes: true,
-      attributeFilter: ["data-theme"],
-    });
-
-    return () => {
-      observer.disconnect();
-    };
-  }, [data, createRendimentoChart]);
+  // Use custom hook to manage chart lifecycle (renders, resize, theme changes)
+  useD3Chart({
+    chartRef,
+    renderChart: createRendimentoChart,
+    data,
+  });
 
   if (loading) {
     return (
@@ -216,3 +144,6 @@ export default function EnergyAveragePerHour() {
     </article>
   );
 }
+
+// Export with memo to prevent unnecessary re-renders
+export default memo(EnergyAveragePerHour);

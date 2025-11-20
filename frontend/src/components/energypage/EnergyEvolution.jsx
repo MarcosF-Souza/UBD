@@ -1,5 +1,6 @@
 import * as d3 from "d3";
 import { useCallback, useEffect, useRef } from "react";
+import { API_ENDPOINTS } from "../../config/constants";
 
 export default function EnergyEvolution() {
   const chartRef = useRef(null);
@@ -215,7 +216,7 @@ export default function EnergyEvolution() {
     const fetchData = async () => {
       try {
         const response = await fetch(
-          "http://localhost:8000/api/energia/rendimento/"
+          API_ENDPOINTS.energia.rendimento
         );
         const json = await response.json();
 

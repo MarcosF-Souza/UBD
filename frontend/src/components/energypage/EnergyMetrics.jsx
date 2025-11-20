@@ -1,53 +1,42 @@
-import { useEffect, useState } from "react";
+import { memo, useMemo } from "react";
+import { useApiData } from "../../hooks/useApiData";
+import { API_ENDPOINTS } from "../../config/constants";
 
-export default function EnergyMetrics() {
-  const [metrics, setMetrics] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+function EnergyMetrics() {
+  const { data, loading, error } = useApiData(API_ENDPOINTS.energia.dados);
 
-  useEffect(() => {
-    fetch("http://localhost:8000/api/energia/dados/")
-      .then((response) => {
-        if (!response.ok) throw new Error("Erro ao carregar dados");
-        return response.json();
-      })
-      .then((jsonData) => {
-        // Calculate metrics from the data
-        const dados = jsonData.dados_completos;
+  // Calculate metrics from data
+  const metrics = useMemo(() => {
+    if (!data?.dados_completos) return null;
 
-        // Calculate average efficiency
-        const rendimentoMedio =
-          dados.reduce((acc, item) => acc + item.percentual_rendimento, 0) /
-          dados.length;
+    const dados = data.dados_completos;
 
-        // Find max efficiency and its time
-        const maxRendimento = dados.reduce((max, item) =>
-          item.percentual_rendimento > max.percentual_rendimento ? item : max
-        );
+    // Calculate average efficiency
+    const rendimentoMedio =
+      dados.reduce((acc, item) => acc + item.percentual_rendimento, 0) / dados.length;
 
-        // Find min efficiency and its time
-        const minRendimento = dados.reduce((min, item) =>
-          item.percentual_rendimento < min.percentual_rendimento ? item : min
-        );
+    // Find max efficiency and its time
+    const maxRendimento = dados.reduce((max, item) =>
+      item.percentual_rendimento > max.percentual_rendimento ? item : max
+    );
 
-        // Find max power and its time
-        const maxPotencia = dados.reduce((max, item) =>
-          item.potencia_kw > max.potencia_kw ? item : max
-        );
+    // Find min efficiency and its time
+    const minRendimento = dados.reduce((min, item) =>
+      item.percentual_rendimento < min.percentual_rendimento ? item : min
+    );
 
-        setMetrics({
-          rendimentoMedio,
-          maxRendimento,
-          minRendimento,
-          maxPotencia,
-        });
-        setLoading(false);
-      })
-      .catch((err) => {
-        setError(err.message);
-        setLoading(false);
-      });
-  }, []);
+    // Find max power and its time
+    const maxPotencia = dados.reduce((max, item) =>
+      item.potencia_kw > max.potencia_kw ? item : max
+    );
+
+    return {
+      rendimentoMedio,
+      maxRendimento,
+      minRendimento,
+      maxPotencia,
+    };
+  }, [data]);
 
   if (loading) {
     return (
@@ -134,3 +123,6 @@ function MetricCard({ title, mainValue, complementValue, color }) {
     </article>
   );
 }
+
+// Export with memo to prevent unnecessary re-renders
+export default memo(EnergyMetrics);

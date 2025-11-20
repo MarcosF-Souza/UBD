@@ -1,5 +1,6 @@
 import * as d3 from "d3";
 import { useCallback, useEffect, useRef, useState } from "react";
+import { API_ENDPOINTS } from "../../config/constants";
 
 export default function HealthHeatMap() {
   const chartRef = useRef(null);
@@ -9,7 +10,7 @@ export default function HealthHeatMap() {
 
   // Fetch data from API
   useEffect(() => {
-    fetch("http://localhost:8000/api/saude/mapa-calor-correlacao/")
+    fetch(API_ENDPOINTS.saude.mapaCalor)
       .then((response) => {
         if (!response.ok) throw new Error("Erro ao carregar dados");
         return response.json();
@@ -64,8 +65,7 @@ export default function HealthHeatMap() {
       .attr("height", height + margin.top + margin.bottom)
       .attr(
         "viewBox",
-        `0 0 ${width + margin.left + margin.right} ${
-          height + margin.top + margin.bottom
+        `0 0 ${width + margin.left + margin.right} ${height + margin.top + margin.bottom
         }`
       )
       .attr("preserveAspectRatio", "xMidYMid meet");

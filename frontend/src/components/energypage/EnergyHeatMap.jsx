@@ -1,5 +1,6 @@
 import * as d3 from "d3";
 import { useCallback, useEffect, useRef, useState } from "react";
+import { API_ENDPOINTS } from "../../config/constants";
 
 export default function EnergyHeatMap() {
   const chartRef = useRef(null);
@@ -8,7 +9,7 @@ export default function EnergyHeatMap() {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    fetch("http://localhost:8000/api/energia/dados/")
+    fetch(API_ENDPOINTS.energia.dados)
       .then((response) => {
         if (!response.ok) throw new Error("Erro ao carregar dados");
         return response.json();
@@ -182,7 +183,7 @@ export default function EnergyHeatMap() {
           offset: `${(i / (legendSteps - 1)) * 100}%`,
           color: colorScale(
             minEficiencia +
-              (i / (legendSteps - 1)) * (maxEficiencia - minEficiencia)
+            (i / (legendSteps - 1)) * (maxEficiencia - minEficiencia)
           ),
         }))
       )

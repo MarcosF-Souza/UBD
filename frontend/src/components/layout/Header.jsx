@@ -1,4 +1,3 @@
-import React from "react";
 import LightModeIcon from "../../assets/icons/light-mode.svg";
 import DarkModeIcon from "../../assets/icons/dark-mode.svg";
 import { Link } from "react-router-dom";

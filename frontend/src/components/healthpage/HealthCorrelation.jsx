@@ -1,5 +1,6 @@
 import * as d3 from "d3";
 import { useCallback, useEffect, useRef, useState } from "react";
+import { API_ENDPOINTS } from "../../config/constants";
 
 export default function HealthCorrelation() {
   const chartRef = useRef(null);
@@ -9,7 +10,7 @@ export default function HealthCorrelation() {
 
   // Fetch data from API
   useEffect(() => {
-    fetch("http://localhost:8000/api/saude/correlacao-variaveis/")
+    fetch(API_ENDPOINTS.saude.correlacao)
       .then((response) => {
         if (!response.ok) throw new Error("Erro ao carregar dados");
         return response.json();
@@ -64,8 +65,7 @@ export default function HealthCorrelation() {
       .attr("height", height + margin.top + margin.bottom)
       .attr(
         "viewBox",
-        `0 0 ${width + margin.left + margin.right} ${
-          height + margin.top + margin.bottom
+        `0 0 ${width + margin.left + margin.right} ${height + margin.top + margin.bottom
         }`
       )
       .attr("preserveAspectRatio", "xMidYMid meet");
