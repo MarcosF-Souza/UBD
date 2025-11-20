@@ -367,7 +367,7 @@ export default function HealthHeatMap() {
   }
 
   return (
-    <article className="flex flex-col bg-tertiary p-6 rounded-lg h-full">
+    <article className="flex flex-col bg-tertiary p-6 rounded-lg h-full health__heat-map">
       <h3 className="text-xl font-medium mb-4 text-center xl:text-left">
         Mapa de Calor de Correlação
       </h3>

@@ -127,6 +127,17 @@
   grid-area: hm;
 }
 
+/* Tablet */
+@media screen and (min-width: 768px) {
+  .health__main {
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto;
+    grid-template-areas:
+      "cor sp"
+      "hm hm";
+  }
+}
+
 /* Desktop */
 @media screen and (min-width: 1440px) {
   .energy__main {

@@ -1,4 +1,3 @@
-import React from "react";
 import HealthCorrelation from "./HealthCorrelation";
 import HealthHeatMap from "./HealthHeatMap";
 import HealthScatter from "./HealthScatter";
